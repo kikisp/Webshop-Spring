@@ -11,7 +11,7 @@
 
 <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-          p:location="/WEB-INF/jdbc.properties" />
+          p:location="jdbc.properties" />
 
 <bean id="dataSource"
     class="org.springframework.jdbc.datasource.DriverManagerDataSource"
@@ -32,6 +32,7 @@
         <property name="annotatedClasses">
             <list>
                 <value>com.webstore.model.User</value>
+                <value>com.webstore.model.Product</value>
             </list>
         </property>
     </bean>
@@ -46,9 +47,9 @@
             <tx:method name="*" />
         </tx:attributes>
     </tx:advice>   
-    
+ 
     <bean id="UserDAO" class="com.webstore.model.UserDAO" />
-    
+ 
 
 
 </beans>
