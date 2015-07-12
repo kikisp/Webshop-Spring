@@ -24,11 +24,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class WebStoreServiceImpl implements WebStoreService {
     @Autowired
     SessionFactory sessionFactory;
-
+    public static final String SQUANTITY = "squantity";
     @Override
     public List<Product> getAllProducts() {
         Session session = sessionFactory.getCurrentSession();
-        List<Product> list = session.createCriteria(Product.class).add(Restrictions.gt("squantity", 0)).list();
+        List<Product> list = session.createCriteria(Product.class).add(Restrictions.gt(SQUANTITY, 0)).list();
         return list;
         
         
