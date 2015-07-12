@@ -38,7 +38,7 @@ public class ProductsTest {
     public void TestGetProducts() {
         List<Product> list = webStoreService.getAllProducts();
         assertNotNull(list);
-        assertEquals("Coca Cola ", list.get(0).getName());
+        assertEquals("Coca Cola ".trim(), list.get(0).getName().trim());
 
     }
 }
