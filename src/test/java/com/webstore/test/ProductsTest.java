@@ -1,6 +1,6 @@
 package com.webstore.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -12,37 +12,33 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.webstore.model.Product;
 import com.webstore.service.WebStoreService;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 /**
  *
  * @author Kiki
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-//@ContextConfiguration(locations = {"classpath*:applicationContext.xml"})
+//@ContextConfiguration(locations = {"classpath*:applicationContext.xml",})
 //@ContextConfiguration ( classes = { CoreServiceTestConfig.class })
 //@ContextConfiguration("file:src/main/webapp/WEB-INF/applicationContext.xml")
 
-@ContextConfiguration
-(
-  {
-   "file:src/main/webapp/WEB-INF/applicationContext.xml",
-   "file:src/main/webapp/WEB-INF/spring_database.xml",
-
-  }
+@ContextConfiguration(
+        {
+            "file:src/main/webapp/WEB-INF/applicationContext.xml",
+            "file:src/main/webapp/WEB-INF/spring_database.xml",}
 )
-
+@WebAppConfiguration
 public class ProductsTest {
 
-	@Autowired
+    @Autowired
     WebStoreService webStoreService;
-    
-    
+
     @Test
     public void TestGetProducts() {
         List<Product> list = webStoreService.getAllProducts();
-        if (list != null) {
-            assertEquals("Coca Cola", list.get(0).getName());
-        }
+        assertNotNull(list);
+        assertEquals("Coca Cola ", list.get(0).getName());
 
     }
 }
