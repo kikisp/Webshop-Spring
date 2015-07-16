@@ -31,7 +31,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Product.findByProductId", query = "SELECT p FROM Product p WHERE p.productId = :productId"),
     @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name"),
     @NamedQuery(name = "Product.findBySquantity", query = "SELECT p FROM Product p WHERE p.squantity = :squantity"),
-    @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price")})
+    @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price"),
+    @NamedQuery(name = "Product.findByDescription", query = "SELECT p FROM Product p WHERE p.description = :description"),
+    @NamedQuery(name = "Product.findByPhoto", query = "SELECT p FROM Product p WHERE p.photo = :photo"),
+    @NamedQuery(name = "Product.findByCategory", query = "SELECT p FROM Product p WHERE p.category = :category"),
+    @NamedQuery(name = "Product.findByPackaging", query = "SELECT p FROM Product p WHERE p.packaging = :packaging")})
 public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,6 +56,21 @@ public class Product implements Serializable {
     @NotNull
     @Column(name = "price")
     private double price;
+    @Size(max = 256)
+    @Column(name = "description")
+    private String description;
+    @Size(max = 256)
+    @Column(name = "photo")
+    private String photo;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "category")
+    private int category;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "packaging")
+    private String packaging;
 
     public Product() {
     }
@@ -60,11 +79,13 @@ public class Product implements Serializable {
         this.productId = productId;
     }
 
-    public Product(Integer productId, String name, int squantity, double price) {
+    public Product(Integer productId, String name, int squantity, double price, int category, String packaging) {
         this.productId = productId;
         this.name = name;
         this.squantity = squantity;
         this.price = price;
+        this.category = category;
+        this.packaging = packaging;
     }
 
     public Integer getProductId() {
@@ -97,6 +118,38 @@ public class Product implements Serializable {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
+
+    public String getPackaging() {
+        return packaging;
+    }
+
+    public void setPackaging(String packaging) {
+        this.packaging = packaging;
     }
 
     @Override

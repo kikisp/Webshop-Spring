@@ -1,5 +1,7 @@
 package com.webstore.test;
 
+import com.webstore.model.Category;
+import com.webstore.model.CategoryDAO;
 import static org.junit.Assert.*;
 
 import java.util.List;
@@ -8,8 +10,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import com.webstore.model.Product;
-import com.webstore.service.WebStoreService;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 /**
@@ -19,17 +19,16 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath:testContext.xml"})
 @WebAppConfiguration
-public class ProductsTest {
+public class CategoriesTest {
 
     @Autowired
-    WebStoreService webStoreService;
+    CategoryDAO categorydao;
 
     @Test
     public void testGetProducts() {
-        List<Product> list = webStoreService.getAllProducts();
+        List<Category> list = categorydao.get();
         assertNotNull(list);
-        assertEquals("Coca Cola".trim(), list.get(0).getName().trim());
-    
-        
+        assertEquals("Soft Drinks".trim(), list.get(0).getName().trim());
+
     }
 }

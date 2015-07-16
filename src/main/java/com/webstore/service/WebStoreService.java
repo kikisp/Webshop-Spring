@@ -5,7 +5,8 @@
  */
 package com.webstore.service;
 
-import com.webstore.model.Order;
+
+import com.webstore.model.Orders;
 import com.webstore.model.Product;
 import java.util.List;
 import java.util.UUID;
@@ -17,6 +18,9 @@ import java.util.UUID;
 public interface WebStoreService {
     
     public List<Product> getAllProducts();
-    public UUID placeOrder(Order merchantOrder);
+    public List<Product> getByCategory(int id);
+    public List<Product> getSearch(String  q);
+    public UUID placeOrder(Orders merchantOrder);
+    
     
 }

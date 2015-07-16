@@ -18,13 +18,15 @@
         <div align="center">
             <form method="post" action="shop" class="sign-up">
                 <h1 class="sign-up-title">Login</h1>
-                <input type='text' class="sign-up-input" name='username' placeholder="Username"  required autofocus>
-                <input type='password' class="sign-up-input" name='password' placeholder="Password" required />
+                <input type='text' class="sign-up-input" name='username' placeholder="Enter Username"  required autofocus oninvalid="this.setCustomValidity('Enter Username Here')"
+                       oninput="setCustomValidity('')">
+                <input type='password' class="sign-up-input" name='password' placeholder="Enter Password" required  oninvalid="this.setCustomValidity('Enter Password Here')"
+                       oninput="setCustomValidity('')"/>
                 <input type="submit" value='LOGIN' class="sign-up-button" />
-                <div>
+                <div class=link>
                     <h2>${msg}</h2>
                     <p><a href="register">Register</a></p>
-                   
+
                 </div>
             </form>  
         </div>

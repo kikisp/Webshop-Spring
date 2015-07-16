@@ -40,4 +40,13 @@ public class UserDAO {
         session.save(u);
        
     }
+    
+    public User compare(String username) {
+        
+    	 Query query = sessionFactory.getCurrentSession()
+                 .createQuery("from User where username = :username ");
+         query.setParameter("username", username);
+         return (User) query.uniqueResult();
+       
+    }
 }

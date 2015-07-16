@@ -25,48 +25,54 @@ import com.webstore.model.UserDAO;
 @Controller
 public class LoginRegControler {
 
+    private String uname;
+    private String pwd;
+    private String mail;
+
     @Autowired
     UserDAO userdao;
+    
+        @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String getindex(ModelMap map) {
+        return "index";
+    }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String getlogin(ModelMap map) {
         return "index";
     }
 
-    @RequestMapping(value = "/shop", method = RequestMethod.POST)
-    public String submitlogin(@RequestParam("username") String username, @RequestParam("password") String password, ModelMap map,HttpServletRequest request) {
-        String cusername = username.trim().replace("--", "");
-        String cpassword = password.trim().replace("--", "");
-        User user = userdao.get(cusername, cpassword);
-        if (user == null) {
-            map.addAttribute("msg", "Wrong username or password!!");
-            return "index";
-        } else {
-            HttpSession hsession = request.getSession();
-            hsession.setAttribute("user", user.getUsername());
-            return "shop";
-        }
-    }
-
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String Register(ModelMap map) {
-        return "register";  
+    public String getregister(ModelMap map) {
+        return "register";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String submitRegister(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("email") String email, ModelMap map) {
 
-        boolean bmail = email.matches("\"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$\"");
-        boolean busername = username != null && ((username = username.trim()).length() > 0);
-        boolean bpassword = password != null && ((password = password.trim()).length() > 0);
+        uname = username.trim().replace("--", "");
+        pwd = password.trim().replace("--", "");
+        mail = email.trim().replace("--", "");
 
-        if (!busername || !bpassword ) {
-            
+        User user = userdao.compare(uname);
+
+        if (user != null) {
+            map.addAttribute("msg", "User already exsist.");
             return "register";
-           
+
         } else {
-            userdao.add(username, password, email);
+            userdao.add(uname, pwd, mail);
+            map.addAttribute("msg", "Registration is successfull.");
             return "index";
         }
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(ModelMap map, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        return "index";
     }
 }

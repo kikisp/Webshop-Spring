@@ -5,11 +5,17 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.0.xsd" xmlns:lang="http://www.springframework.org/schema/lang">
 
-<bean id="propertyConfigurer"
+    
+  <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
           p:location="classpath:jdbc.properties" />
 
@@ -34,6 +40,7 @@
                 <value>com.webstore.model.User</value>
                 <value>com.webstore.model.Product</value>
                 <value>com.webstore.model.Category</value>
+                
             </list>
         </property>
     </bean>
@@ -51,7 +58,8 @@
  
     <bean id="UserDAO" class="com.webstore.model.UserDAO" />
     <bean id="CategoryDAO" class="com.webstore.model.CategoryDAO" />
- 
-
+    
+   <bean id="WebStoreServiceImpl" class="com.webstore.service.WebStoreServiceImpl" />
+   
 
 </beans>
