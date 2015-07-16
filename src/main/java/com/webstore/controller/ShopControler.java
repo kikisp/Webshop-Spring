@@ -34,7 +34,6 @@ public class ShopControler {
 
     private String uname;
     private String pwd;
-    private String mail;
 
     @Autowired
     UserDAO userdao;

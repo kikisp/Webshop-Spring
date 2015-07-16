@@ -21,6 +21,7 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .classpath
 .project
+.tern-project
 .settings/.jsdtscope
 .settings/org.eclipse.core.resources.prefs
 .settings/org.eclipse.jdt.core.prefs
