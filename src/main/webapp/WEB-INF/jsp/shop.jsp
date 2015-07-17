@@ -14,6 +14,7 @@
         
         <link rel="stylesheet" href="resources/css/bootstrap.css" type="text/css" media="screen">              
         <link rel="stylesheet" href="resources/css/main.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="resources/css/plus.css" type="text/css" media="screen">
         <style type="text/css">
         
         .nav, .pagination, .carousel, .panel-title a {
@@ -34,10 +35,9 @@
         <title>Shop</title>
     </head>
     <body>
-
-        <div class="container">
-            <div class="jumbotron">
-                <nav class="navbar navbar-inverse">
+    
+                <div class="jumbotron">
+                <nav class="navbar navbar-inverse navbar-fixed-top">
                     <div class="container-fluid">
                         <div class="navbar-header">
                             <a class="navbar-brand" href="shop">Welcome,${user}</a>
@@ -55,7 +55,7 @@
                                             </c:forEach>
                                     </ul>
                                 </li>
-                                <li><a href="#"><span class="glyphicon 	glyphicon-shopping-cart"></span>Cart</a></li>
+                                <li><a href="cart"><span class="glyphicon 	glyphicon-shopping-cart"></span>Cart</a></li>
                                 <li><a href="logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
                             </ul>
                             <form class="navbar-form navbar-right" role="form"  action="shop/search/" method="post">
@@ -68,10 +68,14 @@
                     </div>
                 </nav>
                 <div align="center">
-                    <img src="resources/images/Webshop.png" class="img-responsive" alt="Webshop" />
+                <br/>
+                    <img src="resources/images/Webshop.png" class="img-responsive slika" alt="Webshop" />
                 </div>
             </div>
-            <div class="well">
+    
+
+        <div class="container">
+            <div class="well well-lg">
                 <div class="row">
                     <c:forEach items="${ProductList}" var="product">
                         <div class="col-sm-4">
