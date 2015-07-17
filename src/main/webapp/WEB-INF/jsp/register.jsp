@@ -1,11 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js">
     <head>
         <base href="/School/" />
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+               
         <link rel="stylesheet" href="resources/css/style.css" type="text/css" media="screen">
-        <link href="resources/images/favicon.ico" rel="shortcut icon"
-              type="image/x-icon" />
+        <link rel="stylesheet" href="resources/css/normalize.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="resources/css/main.css" type="text/css" media="screen">
+      
+        <link href="resources/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+     
+        <script src="resources/js/jplugins.js" type="text/javascript"></script>
+        <script src="resources/js/main.js" type="text/javascript"></script>
+        <script src="resources/js/modernizr-2.8.3.min.js" type="text/javascript"></script>
+              
         <title>Register</title>
        
     </head>
