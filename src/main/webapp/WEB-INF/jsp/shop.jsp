@@ -4,7 +4,7 @@
 
 
 <!DOCTYPE html>
-<html class="no-js">
+<html class="no-js" ng-app="store">
     <head>
         <base href="/School/" />
         <meta charset="utf-8">
@@ -13,14 +13,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <link rel="stylesheet" href="resources/css/bootstrap.css" type="text/css" media="screen">              
-        <link rel="stylesheet" href="resources/css/plus.css" type="text/css" media="screen">              	
-		<link rel="stylesheet" href="resources/css/normalize.css" type="text/css" media="screen">
         <link rel="stylesheet" href="resources/css/main.css" type="text/css" media="screen">
+        <style type="text/css">
+        
+        .nav, .pagination, .carousel, .panel-title a {
+ 		cursor: pointer; 
+        }
+        
+        </style>
 		
         <link href="resources/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />             
                            
-        <script src="resources/js/jquery.min.js" type="text/javascript"></script>
-        <script src="resources/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="resources/js/angular.js" type="text/javascript"></script>
+        <script src="resources/js/ui-bootstrap-tpls-0.13.0.js" type="text/javascript"></script>
+        <script src="resources/js/store.js" type="text/javascript"></script>
         <script src="resources/js/jplugins.js" type="text/javascript"></script>
         <script src="resources/js/main.js" type="text/javascript"></script>
         <script src="resources/js/modernizr-2.8.3.min.js" type="text/javascript"></script>
@@ -39,8 +45,8 @@
                         <div>
                             <ul class="nav navbar-nav navbar-right">
 
-                                <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-list-alt"></span>Categories
+                                <li class="dropdown" dropdown on-toggle="toggled(open)">
+                                    <a href class="dropdown-toggle" dropdown-toggle><span class="glyphicon glyphicon-list-alt"></span>Categories
                                         <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="shop">All</a></li>
