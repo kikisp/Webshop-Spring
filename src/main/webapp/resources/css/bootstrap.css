@@ -5003,7 +5003,7 @@ a.badge:focus {
 }
 .jumbotron {
   padding-bottom: 2px;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   color: inherit;
   background-image: url("../images/sm.png");
 }

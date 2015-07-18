@@ -75,13 +75,13 @@
     
 
         <div class="container">
-            <div class="well well-lg">
+            <div class="well well-lg ">
                 <div class="row">
                     <c:forEach items="${ProductList}" var="product">
                         <div class="col-sm-4">
                             <h3>${product.name}</h3>
                             <h4> Currentlly in stock: ${product.squantity} pieces.</h4>
-                            <p style="height: 150px">
+                            <p  class="textheignt" >
                             <img class="pull-left" src="resources/images/${product.photo}" alt="slika">
                                 ${product.description}
                                 <br class="clearfix"/>
