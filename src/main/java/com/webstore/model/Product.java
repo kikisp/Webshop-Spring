@@ -31,6 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Product.findByProductId", query = "SELECT p FROM Product p WHERE p.productId = :productId"),
     @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name"),
     @NamedQuery(name = "Product.findBySquantity", query = "SELECT p FROM Product p WHERE p.squantity = :squantity"),
+    @NamedQuery(name = "Product.findByOquantity", query = "SELECT p FROM Product p WHERE p.oquantity = :oquantity"),
     @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price"),
     @NamedQuery(name = "Product.findByDescription", query = "SELECT p FROM Product p WHERE p.description = :description"),
     @NamedQuery(name = "Product.findByPhoto", query = "SELECT p FROM Product p WHERE p.photo = :photo"),
@@ -52,6 +53,8 @@ public class Product implements Serializable {
     @NotNull
     @Column(name = "squantity")
     private int squantity;
+    @Column(name = "oquantity")
+    private Integer oquantity;
     @Basic(optional = false)
     @NotNull
     @Column(name = "price")
@@ -110,6 +113,14 @@ public class Product implements Serializable {
 
     public void setSquantity(int squantity) {
         this.squantity = squantity;
+    }
+
+    public Integer getOquantity() {
+        return oquantity;
+    }
+
+    public void setOquantity(Integer oquantity) {
+        this.oquantity = oquantity;
     }
 
     public double getPrice() {
@@ -174,7 +185,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "com.webstore.model.Product[ productId=" + productId + " ]";
+        return "com.webstore.controller.Product[ productId=" + productId + " ]";
     }
     
 }

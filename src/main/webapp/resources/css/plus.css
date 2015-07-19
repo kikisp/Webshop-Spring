@@ -2,6 +2,11 @@
 	margin-top: 40px;
 	
 }
+.panelH{
+    
+    background-color: #333 !important;
+    color: #337ab7 !important;
+}
 .panelB{
 	
 	background-image:url("../images/sm.png");
@@ -32,4 +37,7 @@
 	
 	margin-top:20px;
 	
+}
+.confirmo{
+    margin-top: 30px;
 }

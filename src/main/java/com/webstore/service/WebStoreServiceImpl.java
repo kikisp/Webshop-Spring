@@ -37,6 +37,12 @@ public class WebStoreServiceImpl implements WebStoreService {
         List<Product> list = session.getNamedQuery("Product.findByCategory").setInteger("category", id).list();
         return list;
     }
+    
+     public List<Product> getById(int id){
+        Session session = sessionFactory.getCurrentSession();
+        List<Product> list = (List<Product>) session.getNamedQuery("Product.findByProductId").setInteger("productId", id).list();
+        return list;
+    }
     public List<Product> getSearch(String q){
         Session session = sessionFactory.getCurrentSession();
         List<Product> list = session.createCriteria(Product.class).add(Restrictions.like("name", "%"+q+"%")).list();

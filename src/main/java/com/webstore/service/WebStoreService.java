@@ -18,6 +18,7 @@ import java.util.UUID;
 public interface WebStoreService {
     
     public List<Product> getAllProducts();
+    public List<Product> getById(int id);
     public List<Product> getByCategory(int id);
     public List<Product> getSearch(String  q);
     public UUID placeOrder(Orders merchantOrder);
