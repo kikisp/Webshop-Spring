@@ -185,7 +185,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        return "com.webstore.controller.Product[ productId=" + productId + " ]";
+        return "com.webstore.model.Product[ productId=" + productId + " ]";
     }
     
 }
