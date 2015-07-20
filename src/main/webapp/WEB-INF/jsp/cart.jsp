@@ -65,13 +65,16 @@
             </div>
             <div class="panel-body panelB">
                <div class="row">
-                  <c:forEach items="${ProductsList}" var="product">
+              
+                  <c:set var="TotPrice" value="0" scope="page" />
+                   <c:forEach items="${ProductsList}" var="product">
                      <div class="col-sm-4">
                          <img class="pull-left img-responsive"
                               src="resources/images/${product.photo}" alt="slika">
                         <h3>${product.name}</h3>
                         <h4>Quantity: ${product.oquantity}</h4>
                         <h4>Price: ${product.price*product.oquantity} rsd.</h4>
+                         <c:set var="TotPrice" value="${ TotPrice+product.price*product.oquantity}" scope="page" />
                         <form class="form-inline" role="form" action="remove" method="post">
                               <button type="submit" class="btn btn-primary">Remove</button>   
                               <input type="hidden" name="id" value="${product.productId}" />
@@ -79,7 +82,12 @@
                      </div>
                   </c:forEach>
                </div>
-                 <button type="button" class="btn btn-primary  btn-lg btn-block confirmo">Confirm Order</button>
+                  <h3>Your total price is : ${TotPrice} rsd.</h3>
+                 
+                 <form class="form-inline" role="form" action="confirmorder" method="post">
+                     <button type="submit" class="btn btn-primary  btn-lg btn-block confirmo">Confirm Order</button>
+                              <input type="hidden" name="total" value="${TotPrice}" />
+                           </form>		
             </div>
          </div>
       </div>

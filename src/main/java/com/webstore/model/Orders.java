@@ -32,7 +32,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Orders.findByUuid", query = "SELECT o FROM Orders o WHERE o.uuid = :uuid"),
     @NamedQuery(name = "Orders.findByUserId", query = "SELECT o FROM Orders o WHERE o.userId = :userId"),
     @NamedQuery(name = "Orders.findByOrdertime", query = "SELECT o FROM Orders o WHERE o.ordertime = :ordertime"),
-    @NamedQuery(name = "Orders.findByProduct", query = "SELECT o FROM Orders o WHERE o.product = :product")})
+    @NamedQuery(name = "Orders.findByProduct", query = "SELECT o FROM Orders o WHERE o.product = :product"),
+    @NamedQuery(name = "Orders.findByProductNumber", query = "SELECT o FROM Orders o WHERE o.productNumber = :productNumber"),
+    @NamedQuery(name = "Orders.findByTotalPrice", query = "SELECT o FROM Orders o WHERE o.totalPrice = :totalPrice")})
 public class Orders implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -54,6 +56,14 @@ public class Orders implements Serializable {
     @Size(min = 1, max = 256)
     @Column(name = "product")
     private String product;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "product_number")
+    private int productNumber;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "total_price")
+    private double totalPrice;
 
     public Orders() {
     }
@@ -62,11 +72,13 @@ public class Orders implements Serializable {
         this.uuid = uuid;
     }
 
-    public Orders(Integer uuid, int userId, Date ordertime, String product) {
+    public Orders(Integer uuid, int userId, Date ordertime, String product, int productNumber, double totalPrice) {
         this.uuid = uuid;
         this.userId = userId;
         this.ordertime = ordertime;
         this.product = product;
+        this.productNumber = productNumber;
+        this.totalPrice = totalPrice;
     }
 
     public Integer getUuid() {
@@ -99,6 +111,22 @@ public class Orders implements Serializable {
 
     public void setProduct(String product) {
         this.product = product;
+    }
+
+    public int getProductNumber() {
+        return productNumber;
+    }
+
+    public void setProductNumber(int productNumber) {
+        this.productNumber = productNumber;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
     @Override
