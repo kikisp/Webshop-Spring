@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -65,25 +64,31 @@ public class CartControler {
     @RequestMapping(value = "addtobasket", method = RequestMethod.POST)
     public String addToBasket(ModelMap map, HttpServletRequest request, @RequestParam("id") Integer id,
             @RequestParam("qty") String qty) {
+        if (qty.matches("^[0-9]*$")) {
+            int q = Integer.parseInt(qty);
+            HttpSession session = request.getSession();
+            HashMap<Integer, Product> cart;
+            if (session.getAttribute("cart") == null) {
+                session.setAttribute("cart", new HashMap<>());
+            }
+            cart = (HashMap<Integer, Product>) session.getAttribute("cart");
 
-        int q = Integer.parseInt(qty);
-        HttpSession session = request.getSession();
-        HashMap<Integer, Product> cart;
-        if (session.getAttribute("cart") == null) {
-            session.setAttribute("cart", new HashMap<>());
+            if (!cart.containsKey(id)) {
+                Product product = (Product) webStoreService.getById(id).get(0);
+
+                product.setOquantity(q);
+                cart.put(id, product);
+            } else {
+                Product InCart = cart.get(id);
+                InCart.setOquantity(InCart.getOquantity() + q);
+            }
+
+            return "redirect:/shop";
+
+        }else{
+           return "redirect:/shop"; 
         }
-        cart = (HashMap<Integer, Product>) session.getAttribute("cart");
 
-        if (!cart.containsKey(id)) {
-            Product product = (Product) webStoreService.getById(id).get(0);
-            product.setOquantity(q);
-            cart.put(id, product);
-        } else {
-            Product InCart = cart.get(id);
-            InCart.setOquantity(InCart.getOquantity() + q);
-        }
-
-        return "redirect:/shop";
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
@@ -113,8 +118,6 @@ public class CartControler {
             products.append(p.getValue().getName());
             sum = sum + (p.getValue().getOquantity());
         }
-
-        
 
         Random r = new Random();
         String uuid = String.valueOf(r.nextInt(10000));

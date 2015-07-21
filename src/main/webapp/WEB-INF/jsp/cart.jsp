@@ -82,8 +82,8 @@
                      </div>
                   </c:forEach>
                </div>
-                  <h3>Your total price is : ${TotPrice} rsd.</h3>
-                  <h3>${msg}</h3>
+                  <h4>Your total price is : ${TotPrice} rsd.</h4>
+                  <h4>${msg}</h4>
                  <form class="form-inline" role="form" action="confirmorder" method="post">
                      <button type="submit" class="btn btn-primary  btn-lg btn-block confirmo">Confirm Order</button>
                               <input type="hidden" name="total" value="${TotPrice}" />
