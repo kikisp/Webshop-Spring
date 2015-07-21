@@ -7,8 +7,10 @@ package com.webstore.service;
 
 import com.webstore.model.Orders;
 import com.webstore.model.Product;
+import java.util.HashMap;
 import java.util.List;
-import java.util.UUID;
+import java.util.Map;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -48,11 +50,25 @@ public class WebStoreServiceImpl implements WebStoreService {
         List<Product> list = session.createCriteria(Product.class).add(Restrictions.like("name", "%"+q+"%")).list();
         return list;
     }
+    
+    public void updateProductQty(HashMap cart){
+        
+      Session session = sessionFactory.getCurrentSession();
+       
+      HashMap<Integer, Product> sessionProducts = cart;
+        for (Map.Entry<Integer, Product> p : sessionProducts.entrySet()) {
+            Query q=session.createSQLQuery("UPDATE products SET squantity = squantity - " + p.getValue().getOquantity() + " WHERE product_id = " + p.getValue().getProductId());
+            q.executeUpdate();
+        }
+          
+//           
+        
+    }
 
     @Override
-    public UUID placeOrder(Orders merchantOrder) {
-        // calculate tax for each item
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void placeOrder(Orders merchantOrder) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(merchantOrder);
     }
     
 }

@@ -12,11 +12,16 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.webstore.model.CategoryDAO;
+import com.webstore.model.Orders;
 import com.webstore.model.Product;
 import com.webstore.service.WebStoreService;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -58,7 +63,8 @@ public class CartControler {
     }
 
     @RequestMapping(value = "addtobasket", method = RequestMethod.POST)
-    public String addToBasket(ModelMap map, HttpServletRequest request, @RequestParam("id") Integer id, @RequestParam("qty") String qty) {
+    public String addToBasket(ModelMap map, HttpServletRequest request, @RequestParam("id") Integer id,
+            @RequestParam("qty") String qty) {
 
         int q = Integer.parseInt(qty);
         HttpSession session = request.getSession();
@@ -79,18 +85,52 @@ public class CartControler {
 
         return "redirect:/shop";
     }
-        @RequestMapping(value="/remove", method = RequestMethod.POST)
-    public String remove(ModelMap map, HttpServletRequest request, @RequestParam("id") Integer id){ 
-       
-        
+
+    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    public String remove(ModelMap map, HttpServletRequest request, @RequestParam("id") Integer id) {
+
         HttpSession session = request.getSession();
-        if(session.getAttribute("cart")!=null){
-            HashMap<Integer,Product> products = (HashMap<Integer,Product>)session.getAttribute("cart");
-            if(products.containsKey(id)){
+        if (session.getAttribute("cart") != null) {
+            HashMap<Integer, Product> products = (HashMap<Integer, Product>) session.getAttribute("cart");
+            if (products.containsKey(id)) {
                 products.remove(id);
             }
         }
-        
+
         return "redirect:/cart";
     }
+
+    @RequestMapping(value = "/confirmorder", method = RequestMethod.POST)
+    public String confirm(ModelMap map, HttpServletRequest request, @RequestParam("total") double tprice) {
+
+        StringBuilder products = new StringBuilder();
+        int sum = 0;
+
+        HttpSession session = request.getSession();
+        String username = session.getAttribute("user").toString();
+        HashMap<Integer, Product> sessionProducts = (HashMap<Integer, Product>) session.getAttribute("cart");
+        for (Map.Entry<Integer, Product> p : sessionProducts.entrySet()) {
+            products.append(p.getValue().getName());
+            sum = sum + (p.getValue().getOquantity());
+        }
+
+        
+
+        Random r = new Random();
+        String uuid = String.valueOf(r.nextInt(10000));
+        Orders order = new Orders();
+        order.setUuid(uuid);
+        order.setUsername(username);
+        order.setOrdertime(new Date(new java.util.Date().getTime()));
+        order.setProducts(products.toString());
+        order.setProductNumber(sum);
+        order.setTotalPrice(tprice);
+        webStoreService.placeOrder(order);
+        webStoreService.updateProductQty(sessionProducts);
+
+        session.removeAttribute("cart");
+        map.addAttribute("msg", "Order successfully received.Thank you");
+        return "cart";
+    }
+
 }

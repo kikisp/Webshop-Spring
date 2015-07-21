@@ -34,6 +34,7 @@
                 <value>com.webstore.model.User</value>
                 <value>com.webstore.model.Product</value>
                 <value>com.webstore.model.Category</value>
+                <value>com.webstore.model.Orders</value>
             </list>
         </property>
     </bean>

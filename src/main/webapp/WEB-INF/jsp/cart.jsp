@@ -41,7 +41,7 @@
                   <span class="icon-bar"></span> <span class="icon-bar"></span> <span
                      class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" href="cart">Cart</a>
+                  <a class="navbar-brand" href="cart"><span class="glyphicon glyphicon-star"></span>Cart</a>
                </div>
                <div class="collapse navbar-collapse" id="myNavbar">
                   <div>
@@ -83,7 +83,7 @@
                   </c:forEach>
                </div>
                   <h3>Your total price is : ${TotPrice} rsd.</h3>
-                 
+                  <h3>${msg}</h3>
                  <form class="form-inline" role="form" action="confirmorder" method="post">
                      <button type="submit" class="btn btn-primary  btn-lg btn-block confirmo">Confirm Order</button>
                               <input type="hidden" name="total" value="${TotPrice}" />

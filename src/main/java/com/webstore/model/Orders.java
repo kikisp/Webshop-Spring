@@ -30,9 +30,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Orders.findAll", query = "SELECT o FROM Orders o"),
     @NamedQuery(name = "Orders.findByUuid", query = "SELECT o FROM Orders o WHERE o.uuid = :uuid"),
-    @NamedQuery(name = "Orders.findByUserId", query = "SELECT o FROM Orders o WHERE o.userId = :userId"),
+    @NamedQuery(name = "Orders.findByUsername", query = "SELECT o FROM Orders o WHERE o.username = :username"),
     @NamedQuery(name = "Orders.findByOrdertime", query = "SELECT o FROM Orders o WHERE o.ordertime = :ordertime"),
-    @NamedQuery(name = "Orders.findByProduct", query = "SELECT o FROM Orders o WHERE o.product = :product"),
+    @NamedQuery(name = "Orders.findByProducts", query = "SELECT o FROM Orders o WHERE o.products = :products"),
     @NamedQuery(name = "Orders.findByProductNumber", query = "SELECT o FROM Orders o WHERE o.productNumber = :productNumber"),
     @NamedQuery(name = "Orders.findByTotalPrice", query = "SELECT o FROM Orders o WHERE o.totalPrice = :totalPrice")})
 public class Orders implements Serializable {
@@ -40,12 +40,14 @@ public class Orders implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 128)
     @Column(name = "uuid")
-    private Integer uuid;
+    private String uuid;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "user_id")
-    private int userId;
+    @Size(min = 1, max = 45)
+    @Column(name = "username")
+    private String username;
     @Basic(optional = false)
     @NotNull
     @Column(name = "ordertime")
@@ -54,8 +56,8 @@ public class Orders implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 256)
-    @Column(name = "product")
-    private String product;
+    @Column(name = "products")
+    private String products;
     @Basic(optional = false)
     @NotNull
     @Column(name = "product_number")
@@ -68,33 +70,33 @@ public class Orders implements Serializable {
     public Orders() {
     }
 
-    public Orders(Integer uuid) {
+    public Orders(String uuid) {
         this.uuid = uuid;
     }
 
-    public Orders(Integer uuid, int userId, Date ordertime, String product, int productNumber, double totalPrice) {
+    public Orders(String uuid, String username, Date ordertime, String products, int productNumber, double totalPrice) {
         this.uuid = uuid;
-        this.userId = userId;
+        this.username = username;
         this.ordertime = ordertime;
-        this.product = product;
+        this.products = products;
         this.productNumber = productNumber;
         this.totalPrice = totalPrice;
     }
 
-    public Integer getUuid() {
+    public String getUuid() {
         return uuid;
     }
 
-    public void setUuid(Integer uuid) {
+    public void setUuid(String uuid) {
         this.uuid = uuid;
     }
 
-    public int getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Date getOrdertime() {
@@ -105,12 +107,12 @@ public class Orders implements Serializable {
         this.ordertime = ordertime;
     }
 
-    public String getProduct() {
-        return product;
+    public String getProducts() {
+        return products;
     }
 
-    public void setProduct(String product) {
-        this.product = product;
+    public void setProducts(String products) {
+        this.products = products;
     }
 
     public int getProductNumber() {
