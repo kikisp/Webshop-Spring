@@ -5,26 +5,27 @@
  */
 package com.webstore.controller;
 
-import com.webstore.model.Category;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.webstore.model.CategoryDAO;
-import com.webstore.model.Orders;
-import com.webstore.model.Product;
-import com.webstore.service.WebStoreService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.webstore.model.CategoryDAO;
+import com.webstore.model.Orders;
+import com.webstore.model.Product;
+import com.webstore.service.WebStoreService;
 
 /**
  *
@@ -41,9 +42,6 @@ public class CartControler {
 
     @RequestMapping("/cart")
     public String cart(HttpServletRequest request, ModelMap model) {
-
-        List<Category> categories = categorydao.get();
-        model.addAttribute("CategoryList", categories);
 
         List<Product> products = new ArrayList<>();
 
@@ -120,6 +118,7 @@ public class CartControler {
        }else{
         for (Map.Entry<Integer, Product> p : sessionProducts.entrySet()) {
             products.append(p.getValue().getName());
+            products.append(" , ");
             sum = sum + (p.getValue().getOquantity());
         }
 
