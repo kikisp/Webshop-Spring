@@ -82,7 +82,7 @@ public class CartControler {
                 Product InCart = cart.get(id);
                 InCart.setOquantity(InCart.getOquantity() + q);
             }
-
+            
             return "redirect:/shop";
 
         }else{
@@ -114,6 +114,10 @@ public class CartControler {
         HttpSession session = request.getSession();
         String username = session.getAttribute("user").toString();
         HashMap<Integer, Product> sessionProducts = (HashMap<Integer, Product>) session.getAttribute("cart");
+       if(session.getAttribute("cart") == null || sessionProducts.isEmpty()) {
+          map.addAttribute("msg", "Your cart is empty.Order cant be completed");
+          return "cart"; 
+       }else{
         for (Map.Entry<Integer, Product> p : sessionProducts.entrySet()) {
             products.append(p.getValue().getName());
             sum = sum + (p.getValue().getOquantity());
@@ -132,8 +136,8 @@ public class CartControler {
         webStoreService.updateProductQty(sessionProducts);
 
         session.removeAttribute("cart");
-        map.addAttribute("msg", "Order successfully received.Thank you");
+        map.addAttribute("msg", "Order successfully received.Your order number is: "+uuid);
         return "cart";
     }
-
+    }
 }
