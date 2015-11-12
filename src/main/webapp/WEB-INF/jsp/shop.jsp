@@ -24,9 +24,8 @@
 <script src="resources/js/jquery.min.js" type="text/javascript"></script>
 <script src="resources/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="resources/js/angular.js" type="text/javascript"></script>
-<script src="resources/js/ui-bootstrap-tpls-0.13.0.js"
-	type="text/javascript"></script>
 <script src="resources/js/store.js" type="text/javascript"></script>
+<script src="resources/js/ui-bootstrap-tpls-0.13.0.js" type="text/javascript"></script>
 <script src="resources/js/jplugins.js" type="text/javascript"></script>
 <script src="resources/js/main.js" type="text/javascript"></script>
 <script src="resources/js/modernizr-2.8.3.min.js" type="text/javascript"></script>
@@ -84,7 +83,7 @@
 				class="img-responsive slika" alt="Webshop" />
 		</div>
 	</div>
-	<div class="container">
+	<div class="container" ng-controller="storeCtrl">
 		<div class="panel panel-default">
 			<div class="panel-body panelB">
 				<div class="row">
